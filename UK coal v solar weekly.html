@@ -1,0 +1,219 @@
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<style>
+	
+	#container {max-width: 800px;}
+
+	#logocontainer{ max-width: 800px; height: 26px;}
+	#logo {position: absolute; right:10px;}
+	
+	@media screen and (min-width: 830px) {
+	    #logo {
+	        left: 778px;
+	    }
+	}
+	
+</style>
+</head>
+<body>
+	<!-- you can set minimum dimensions for the chart here -->
+	<!-- for example swap the <div below for this version -->
+	<!-- <div id="container" style="min-width: 310px; max-width: 600px; height: 400px; margin: 0 auto"></div> -->
+	
+    <div id="container"></div>
+		<div id="logocontainer">
+			<img id="logo" src="https://s3-eu-west-1.amazonaws.com/cbhighcharts/CB-logo-for-highcharts.png">
+		</div>
+    <script type="text/javascript">        
+	$(function() {
+	  Highcharts.setOptions({
+
+	    // here is the CB colour scheme
+	    // dark blue - 0b4572
+	    // yellow - EFC530
+	    // light blue - 2f8fce
+	    // red - C7432B
+	    // light grey - 999999
+	    // lilac - A14A7B
+	    // orange - DF9239
+
+	    // this line sets the colours
+	    // the first colour is for bottom chunk of a stacked column (reversed: false)
+		// you can make a gradient of (say) 15 steps from CB dark blue to red, via grey
+	    // you can make your own gradient custom here:
+	    // http://www.strangeplanet.fr/work/gradient-generator/?c=15:0b4572:C7432B
+
+        colors: ['#DF9239', '#999999', '#2f8fce', '#C7432B', '#999999', '#DF9239', '#E5E5E5'],
+	    
+	    chart: {
+     
+	     //    set the font family for the chart. PT Serif is CB default for body text.
+     
+	      style: {
+	        fontFamily: 'PT Sans'
+	      }
+	    }
+	  });
+
+	  // Create the chart
+	  // type: 'column'
+	  // creates column chart. See www.highcharts.com/demo/ for more options
+	  // zoomType: 'x,y'
+	  // allows the user to zoom in to the chart on the x and y axis
+	  // you can set to allow x zoom or y zoom only
+
+	  $('#container').highcharts({
+	      chart: {
+	        renderTo: 'container',
+	        backgroundColor: 'transparent',
+	        type: 'line',
+	        zoomType: 'x,y'
+	      },
+
+	      // set the title of the chart (here no title)
+
+	      title: {
+	        text: 'UK coal versus solar',
+					align: 'left',
+					margin: 30
+	      },
+
+	      // turn off the highcharts credit
+
+	      credits: {
+	        enabled: false
+	      },
+
+	      // controls how the columns stack
+	      // options are 'normal' and 'percent'
+		  // if you don't want stacked columns, delete this section
+
+	      plotOptions: {
+	        bar: {
+	          stacking: 'normal'
+	        }
+	      },
+
+	      // options for the y axis
+
+	      yAxis: {
+
+	// controls the order of series in a stacked column/area chart
+
+	        reversedStacks: false,
+
+// fixes the maximum value for the y axis (switch off with "//")
+//			  max: 300,
+
+
+	        // sets the font size for the y axis labels
+
+	        labels: {
+	          style: {
+	            fontSize: '12px'
+	          },
+
+	          // adds the suffix "Mt" to the values on the y axis
+
+	          format: '{value:,.0f} GWh'
+	        },
+
+	        // set the title of the y axis
+
+	        title: {
+	          text: ''
+	        }
+	      },
+
+	      // sets options for the x axis
+
+	      xAxis: {
+			  type: 'category',
+			  crosshair: {
+			                //  width: 40,
+				  // pale grey #E5E5E5
+				  // black #000000
+			            //      color: '#E5E5E5'
+			              },
+	        labels: {
+	          style: {
+	            fontSize: '12px'
+	          }
+	        }
+	      },
+
+		  tooltip: {
+			  shared: true,
+			  valueDecimals: 1,			  
+		           pointFormat: '{series.name}: <br/> <b>{point.y:,.0f} GWh</b><br/>',
+//			  crosshairs: 'true'
+		         },
+
+	      // sets options for the legend
+
+	      legend: {
+
+	        // turn the legend on or off
+
+	        enabled: true,
+		//	 margin: 20,
+		//	  width: 400,
+			  padding: 20,
+
+	        // set the layout of the legend
+
+	        layout: 'horizontal',
+	        floating: false,
+	        verticalAlign: 'top',
+
+	        // you can fine-tune the legend position here
+	        // y: 30,
+	         x: 15,
+			  
+	        // set the font size of the legend
+			// add "//" to use default settings
+
+//	        itemStyle: {
+//	          fontSize: '10px'
+//	        }
+
+	      },
+
+	      // pull the data from a google spreadsheet
+	      // you have to publish the spreadsheet to the web
+	      // then grab the code from the url
+	      // for example here, the bit after "d/" and before the final "/"
+	      // https://docs.google.com/spreadsheets/d/1NAzRluJxGjyrJqsI6kjtSYxcPXTIL-lQZ6chFDcx2XI/
+
+	      data: {
+	        googleSpreadsheetKey: '13WtHhTyysk2q8sFSBEsy3paPqYW6XD4oQ038Pq0ZTKM'
+	      }
+	    },
+
+	    // add an image on top of the chart
+	    // you can add anything eg to annotate it
+	    // here we're using it to add the CB logo
+	    // the size and position of the logo is controlled by the numbers after the url
+	    // the first sets the x offset (#pixels from the left)
+	    // the second sets the y offset (#pixels from the top)
+	    // the third and fourth set the size in x, y
+
+	    function(chart) { // on complete
+
+	      chart.renderer.image()
+	        .add();
+
+
+	    });
+
+
+	});
+    
+
+    </script>
+</body>
+</html>
