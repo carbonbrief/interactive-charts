@@ -71,16 +71,16 @@
 	        renderTo: 'container',
 	        backgroundColor: 'transparent',
 	        type: 'column',
-			marginLeft: 90,
+//			marginLeft: 90,
 	        zoomType: 'x,y'
 	      },
 
 	      // set the title of the chart (here no title)
 
 	      title: {
-	        text: 'EU ESD 2020',
-					align: 'left',
-					margin: 30
+		        text: 'EU ESD 2020 2030',
+						align: 'left',
+						margin: 30
 	      },
 
 		  // disable the export hamburger menu
@@ -104,7 +104,7 @@
 
 	      plotOptions: {
   			column: {
-  	          stacking: 'normal',
+//  	          stacking: 'null',
   	//			negativeColor: '#C7432B',
   				pointPadding: 0,
   				groupPadding: 0.05
@@ -132,7 +132,7 @@
 
 	          // adds the suffix "Mt" to the values on the y axis
 
-	          format: '{value} %'
+	          format: '{value} Mt'
 	        },
 
 	        // set the title of the y axis
@@ -161,7 +161,7 @@
 
 		  tooltip: {
 			  			  valueDecimals: 1,
-		           pointFormat: '2020 target: <br/> <b>{point.y:,.0f} %</b><br/>',
+		           pointFormat: '{series.name}: <br/> <b>{point.y:,.0f} Mt</b><br/>',
 //			  crosshairs: 'true'
 		         },
 
@@ -171,7 +171,7 @@
 
 	        // turn the legend on or off
 
-	        enabled: false,
+	        enabled: true,
 			  padding: 20,
 	        // set the layout of the legend
 
@@ -180,8 +180,8 @@
 	        verticalAlign: 'top',
 
 	        // you can fine-tune the legend position here
-	        // y: 30,
-	         x: 15,
+	        y: 20
+	        // x: 15,
 			  
 	        // set the font size of the legend
 			// add "//" to use default settings
@@ -199,7 +199,7 @@
 	      // https://docs.google.com/spreadsheets/d/1NAzRluJxGjyrJqsI6kjtSYxcPXTIL-lQZ6chFDcx2XI/
 
 	      data: {
-	        googleSpreadsheetKey: '1P3F-EvxwzbGlt9E2T3bpcXJ3_nDAqaKW08cQMniRNRY'
+	        googleSpreadsheetKey: '1XBHNq1Nj3mRJoyhzokNnD9H0XOWE8u2QzVrAlbvjNzU'
 	      }
 	    },
 
