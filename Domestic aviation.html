@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Graph: Global coal production vs exports | Carbon Brief</title>
+	<title>Graph: Domestic aviation's share of total emissions | Carbon Brief</title>
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/data.js"></script>
@@ -25,7 +25,7 @@
 	<!-- for example swap the <div below for this version -->
 	<!-- <div id="container" style="min-width: 310px; max-width: 600px; height: 400px; margin: 0 auto"></div> -->
 	
-    <div id="container"></div>
+    <div id="container" style="max-width: 800px"></div>
 		<div id="logocontainer">
 			<img id="logo" src="https://s3-eu-west-1.amazonaws.com/cbhighcharts/CB-logo-for-highcharts.png">
 		</div>
@@ -48,34 +48,12 @@
 	    // you can make your own gradient custom here:
 	    // http://www.strangeplanet.fr/work/gradient-generator/?c=9:FFFFFF:000000
 
-	    colors: [{
-	      linearGradient: {
-	        x1: 0,
-	        x2: 0,
-	        y1: 0,
-	        y2: 1
-	      },
-	      stops: [
-	        [0, '#0b4572'],
-	        [1, '#ffffff']
-	      ]
-	    }, {
-	      linearGradient: {
-	        x1: 0,
-	        x2: 0,
-	        y1: 0,
-	        y2: 1
-	      },
-	      stops: [
-	        [0, '#C7432B'],
-	        [1, '#ffffff']
-	      ]
-	    }, '#2f8fce', '#C7432B', '#999999', '#DF9239', '#A14A7B'],
-
+        colors: ['#0b4572', '#EFC530', '#2f8fce', '#C7432B', '#999999', '#DF9239', '#A14A7B'],
+	    
 	    chart: {
-
-	      //    set the font family for the chart. PT Serif is CB default for body text.
-
+     
+	     //    set the font family for the chart. PT Serif is CB default for body text.
+     
 	      style: {
 	        fontFamily: 'PT Sans'
 	      }
@@ -93,22 +71,28 @@
 	      chart: {
 	        renderTo: 'container',
 	        backgroundColor: 'transparent',
-	        type: 'area',
-	        zoomType: 'x',
-					marginBottom: 40
-	      },
-	      rangeSelector: {
-	        selected: 1
+	        type: 'column',
+					// marginLeft: 90,
+//					marginBottom: 70,
+	        zoomType: 'x,y'
 	      },
 
 	      // set the title of the chart (here no title)
 
 	      title: {
-	        text: 'Global coal production vs exports',
+	        text: "Domestic aviation's share of total emissions",
 					align: 'left',
-					margin: 40
+					margin: 30
 	      },
+
+		  // disable the export hamburger menu
 		  
+		  navigation: {
+		              buttonOptions: {
+		                  enabled: false
+		              }
+		          },
+
 
 	      // turn off the highcharts credit
 
@@ -118,54 +102,27 @@
 
 	      // controls how the columns stack
 	      // options are 'normal' and 'percent'
-	      // if you don't want stacked columns, delete this section
-	      tooltip: {
-	      shared: true,
-	        pointFormat: '{series.name} <b>{point.y:,.0f} Mt</b><br/>',
-	        //          crosshairs: 'true'
-	      },
+		  // if you don't want stacked columns, delete this section
 
 	      plotOptions: {
-
-	//        column: {
-	//          stacking: 'normal'
-	//        },
-	        area: {
-	          marker: {
-	            enabled: false,
-	            symbol: 'circle',
-	            radius: 2,
-	            states: {
-	              hover: {
-	                enabled: true
-	              }
-	            }
-	          }
-	        },
-	        series: {
-	       //       showCheckbox: true,
-	        lineColor: '#5F5F5F',
-	        lineWidth: 1
-	          // fillColor: {
-	          //            linearGradient: [0, 0, 0, 350],
-	          //            stops: [
-	          //              [0, Highcharts.getOptions().colors[0]],
-	          //              [1, // Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-	          //            ]
-	          //          }
-	        }
+  			column: {
+  	          stacking: 'normal',
+  	//			negativeColor: '#C7432B',
+  				pointPadding: 0,
+  				groupPadding: 0
+  	        }
 	      },
 
 	      // options for the y axis
 
 	      yAxis: {
 
-	        // controls the order of series in a stacked column/area chart
+	// controls the order of series in a stacked column/area chart
 
 	        reversedStacks: false,
 
-	        // fixes the maximum value for the y axis (switch off with "//")
-	        //			  max: 300,
+// fixes the maximum value for the y axis (switch off with "//")
+//			  max: 300,
 
 
 	        // sets the font size for the y axis labels
@@ -177,7 +134,7 @@
 
 	          // adds the suffix "Mt" to the values on the y axis
 
-	          format: '{value:,.0f} Mt'
+	          format: '{value} %'
 	        },
 
 	        // set the title of the y axis
@@ -190,16 +147,27 @@
 	      // sets options for the x axis
 
 	      xAxis: {
-	        crosshair: {
-	          width: 2,
-	          color: '#E5E5E5'
-	        },
+			  type: 'category',
+			  crosshair: {
+			                //  width: 40,
+				  // pale grey #E5E5E5
+				  // black #000000
+			                  color: '#E5E5E5'
+			              },
 	        labels: {
+				rotation: -90,
 	          style: {
-	            fontSize: '12px'
+	            fontSize: '12px',
+				
 	          }
 	        }
 	      },
+
+		  tooltip: {
+			  			  valueDecimals: 1,
+		           pointFormat: '<b>{point.y:,.0f} %</b><br/>',
+//			  crosshairs: 'true'
+		         },
 
 	      // sets options for the legend
 
@@ -207,8 +175,8 @@
 
 	        // turn the legend on or off
 
-	        enabled: true,
-
+	        enabled: false,
+			  padding: 20,
 	        // set the layout of the legend
 
 	        layout: 'horizontal',
@@ -216,15 +184,15 @@
 	        verticalAlign: 'top',
 
 	        // you can fine-tune the legend position here
-	        y: 30
-	        //x: 15,
-
+	        // y: 30,
+	         x: 15,
+			  
 	        // set the font size of the legend
-	        // add "//" to use default settings
+			// add "//" to use default settings
 
-	        //	        itemStyle: {
-	        //	          fontSize: '10px'
-	        //	        }
+//	        itemStyle: {
+//	          fontSize: '10px'
+//	        }
 
 	      },
 
@@ -235,7 +203,7 @@
 	      // https://docs.google.com/spreadsheets/d/1NAzRluJxGjyrJqsI6kjtSYxcPXTIL-lQZ6chFDcx2XI/
 
 	      data: {
-	        googleSpreadsheetKey: '1zIf8BDveEJA_Cyo0L8r8GZVJ_B-HxEyr-rrJx51-xHE'
+	        googleSpreadsheetKey: '1bIoubSaHlTVB9WCvdyI5XGAQtBRtgEMi_zo8599yrtM'
 	      }
 	    },
 

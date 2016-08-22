@@ -1,6 +1,5 @@
 <html>
 <head>
-	<title>Graph: German greenhouse gas emissions and targets | Carbon Brief</title>
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/data.js"></script>
@@ -33,7 +32,7 @@
     <script type="text/javascript">        
 	$(function() {
 	  Highcharts.setOptions({
-	    colors: ['#0b4572', '#EFC530', '#2f8fce', '#C7432B', '#999999', '#DF9239', '#A14A7B', '#D8D8D8', '#D8D8D8', '#e5c557', '#999999', '#999999'],
+	    colors: ['#0b4572', '#2f8fce', '#EFC530', '#A14A7B', '#999999', '#DF9239', '#A14A7B', '#D8D8D8', '#D8D8D8', '#e5c557', '#999999', '#999999'],
 	    chart: {
 	      style: {
 	        fontFamily: 'PT Sans'
@@ -59,7 +58,7 @@
 		              }
 		          },
 	      title: {
-	        text: 'German greenhouse gas emissions and targets',
+	        text: 'Enteric emissions',
 			  align: 'left'
 	      },
 	      credits: {
@@ -89,7 +88,7 @@
 
   	          // adds the suffix "Mt" to the values on the y axis
 
-  	          format: '{value:,.0f} Mt'
+  	          format: '{value:,.0f} million'
   	        },
 
   	        // set the title of the y axis
@@ -97,13 +96,37 @@
   	        title: {
   	          text: ''
   	        }
-	      }],
+	      },
+		  {
+
+  	        labels: {
+  	          style: {
+  	            fontSize: '12px',
+               
+                    color: '#A14A7B'
+                
+  	          },
+
+  	          // adds the suffix "Mt" to the values on the y axis
+
+  	          format: '{value} %'
+  	        },
+
+  	        // set the title of the y axis
+
+  	        title: {
+  	          text: ''
+  	        },
+			opposite: true
+		  }
+	  ],
 	      xAxis: {
 	        type: 'category',
 			  crosshair: {
 			  	
 			  },
   	        labels: {
+				rotation: -90,
   	          style: {
   	            fontSize: '12px'
   	          }
@@ -119,37 +142,23 @@
 			y: 20,
 //          x: 15
         },
-	      tooltip: {
-	        valueSuffix: ' MtCO2e',
-	        
-	        formatter: function() {
-				var firstValueInData = this.series.yData[0],
-				rate;
-				rate = ((this.y - firstValueInData)/firstValueInData * 100).toFixed(1);
-			
-	        	// turning off tooltips for undefined values
-	          if (typeof this.y === 'undefined') {
-	            return false;
-	            // custom tooltip for the rest values
-	          } else {
-	            return this.point.name + ' <br/> ' + ' <span style="color:' + this.point.color + '">\u25CF</span> ' + this.series.name + ': <b>' + this.y + ' MtCO2e</b><br/>(' + (rate > 0 ? '+' + rate : rate) + '% since 1990)';
-	          }
-	        }
-	      },
+		  tooltip: {
+			  valueSuffix: ' million',
+		           pointFormat: '{series.name}: <br/> <b>{point.y}</b><br/>',
+//			  crosshairs: 'true'
+			  shared: true
+		         },
 
 	      data: {
-	        googleSpreadsheetKey: '1NpYrFOvLx6bGe5hJbWOOswzTmQ7CizCVRyF94suqLAI',
+	        googleSpreadsheetKey: '1i_UsuUR8T4cIZTuklfx2dgF94utwSQWTGbuAxVkX0b0',
               complete: function (options) {
               	var series = options.series;
               
-                // adding type of series on the fly
-                series[7].type = 'line';
-				series[8].type = 'line';
-				
-//				series[7].lineWidth = '5';
-//				series[7].lineWidth = 3;
-				series[8].symbol = 'circle';
-				series[8].showInLegend = false;
+                series[3].type = 'line';
+				series[3].yAxis = 1;
+				series[3].tooltip = {
+					valueSuffix: ' %'
+				}
 			}
 	      }
 	    },
