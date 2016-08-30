@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Solar capacity of the G20 countries and the rest of the world in 2015 | Carbon Brief</title>
+	<title>Nuclear power capacity of the G20 countries and the rest of the world in 2015 | Carbon Brief</title>
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/data.js"></script>
@@ -50,7 +50,7 @@ $('#container').highcharts({
 		chart: {
 			renderTo: 'container',
 			backgroundColor: 'transparent',
-			plotBackgroundImage: 'https://www.carbonbrief.org/wp-content/uploads/2016/08/GettyImages-157433607-solar-panels-close-up.jpg',
+			plotBackgroundImage: 'https://www.carbonbrief.org/wp-content/uploads/2016/08/GettyImages-182899688-nuclear-reactor.jpg',
 			type: 'treemap',
 			spacing: [0,-10,0,-10]
     },
@@ -58,7 +58,7 @@ $('#container').highcharts({
       fontFamily: 'PT Sans'
     },
     title: {
-      text: 'Solar capacity',
+      text: 'Nuclear capacity',
 	  align: 'left',
 		x: 10
     },
@@ -107,7 +107,7 @@ $('#container').highcharts({
 
     data: {
     		firstRowAsNames: false,
-        googleSpreadsheetKey: '1Ks10C1H3gEEfEblxZt33DEyqlohveex6mvB8qvPuEHk',
+        googleSpreadsheetKey: '1qiNbP5b9GaUcCQzgm-xp3mCczluMDlpvlshuPQA1eVo',
         seriesMapping: [{
           value: 1,
           id: 2,
@@ -118,7 +118,7 @@ $('#container').highcharts({
           tooltip: {
       valueSuffix: ' Mtoe',
       formatter: function() {
-      var globalShare = ((this.point.value * 100)/223948.5).toFixed(1);
+      var globalShare = ((this.point.value * 100)/344974).toFixed(1);
       return this.point.name + ' <br/> ' + ' <span style="color:' + this.point.color + '">\u25CF</span> ' + Highcharts.numberFormat(this.point.value, 0) + ' MW<br/>(' + globalShare + ' % of global total)'
       }
       },
