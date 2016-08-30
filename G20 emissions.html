@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Solar capacity of the G20 countries and the rest of the world in 2015 | Carbon Brief</title>
+	<title>Energy-related CO2 emissions of the G20 countries and the rest of the world in 2015 | Carbon Brief</title>
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/data.js"></script>
@@ -9,12 +9,11 @@
 </head>
 <style>
 	
-	#container {max-width: 800px; height: 500px; position: relative; display:block;}
+	#container {max-width: 800px;height: 500px;}
 	#container image {
 	   opacity: 0.6;
 
 	}
-
 	#logocontainer{ max-width: 800px; height: 26px; padding-top: 10px;}
 	#logo {position: absolute; right:10px;}
 	
@@ -48,17 +47,21 @@
 
 $('#container').highcharts({
 		chart: {
-			renderTo: 'container',
-			backgroundColor: 'transparent',
-			plotBackgroundImage: 'https://www.carbonbrief.org/wp-content/uploads/2016/08/GettyImages-157433607-solar-panels-close-up.jpg',
-			type: 'treemap',
+      renderTo: 'container',
+      backgroundColor: 'transparent',
+			// you can even use a GIF here, though it gets a bit busy…
+			plotBackgroundImage: 'https://www.carbonbrief.org/wp-content/uploads/2016/08/GettyImages-182686229-smokestacks-emissions.jpg',
+			
+    	type: 'treemap',
 			spacing: [0,-10,0,-10]
+
+    
     },
     style: {
       fontFamily: 'PT Sans'
     },
     title: {
-      text: 'Solar capacity',
+      text: 'CO2 emissions',
 	  align: 'left',
 		x: 10
     },
@@ -67,7 +70,7 @@ $('#container').highcharts({
                   enabled: false
               }
           },
-                   
+
 
     credits: {
       enabled: false
@@ -104,10 +107,9 @@ $('#container').highcharts({
        }
       },
 
-
     data: {
     		firstRowAsNames: false,
-        googleSpreadsheetKey: '1Ks10C1H3gEEfEblxZt33DEyqlohveex6mvB8qvPuEHk',
+        googleSpreadsheetKey: '1MO8_ZrNuGajy8CX8nPkhTdZpNdbonLDbIjzbCTBfThE',
         seriesMapping: [{
           value: 1,
           id: 2,
@@ -116,10 +118,10 @@ $('#container').highcharts({
         }]
     },
           tooltip: {
-      valueSuffix: ' Mtoe',
+      valueSuffix: ' MtCO2',
       formatter: function() {
-      var globalShare = ((this.point.value * 100)/223948.5).toFixed(1);
-      return this.point.name + ' <br/> ' + ' <span style="color:' + this.point.color + '">\u25CF</span> ' + Highcharts.numberFormat(this.point.value, 0) + ' MW<br/>(' + globalShare + ' % of global total)'
+      var globalShare = ((this.point.value * 100)/33508).toFixed(1);
+      return this.point.name + ' <br/> ' + ' <span style="color:' + this.point.color + '">\u25CF</span> ' + Highcharts.numberFormat(this.point.value, 0) + ' MtCO2<br/>(' + globalShare + ' % of global total)'
       }
       },
 	    },
