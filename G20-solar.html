@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Oil use of the G20 countries and the rest of the world in 2015 | Carbon Brief</title>
+	<title>Solar capacity of the G20 countries and the rest of the world in 2015 | Carbon Brief</title>
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/data.js"></script>
@@ -40,7 +40,7 @@
 	    
 	    chart: {
 	      style: {
-	        fontFamily: 'PT Sans'
+	        fontFamily: '"PT Sans", Arial, sans-serif'
 	      }
 	    },
 
@@ -50,15 +50,15 @@ $('#container').highcharts({
 		chart: {
 			renderTo: 'container',
 			backgroundColor: 'transparent',
-			plotBackgroundImage: 'https://www.carbonbrief.org/wp-content/uploads/2016/08/oil-barrels.jpg',
+			plotBackgroundImage: 'https://www.carbonbrief.org/wp-content/uploads/2016/08/GettyImages-157433607-solar-panels-close-up.jpg',
 			type: 'treemap',
 			spacing: [0,-10,0,-10]
-			},
+    },
     style: {
       fontFamily: 'PT Sans'
     },
     title: {
-      text: 'Oil use',
+      text: 'Solar capacity',
 	  align: 'left',
 		x: 10
     },
@@ -67,6 +67,7 @@ $('#container').highcharts({
                   enabled: false
               }
           },
+                   
 
     credits: {
       enabled: false
@@ -106,7 +107,7 @@ $('#container').highcharts({
 
     data: {
     		firstRowAsNames: false,
-        googleSpreadsheetKey: '1w3owW-yEjvkL6vw-I7qf5vgG87XH4F8zPPnLoaRbcTQ',
+        googleSpreadsheetKey: '1Ks10C1H3gEEfEblxZt33DEyqlohveex6mvB8qvPuEHk',
         seriesMapping: [{
           value: 1,
           id: 2,
@@ -117,8 +118,8 @@ $('#container').highcharts({
           tooltip: {
       valueSuffix: ' Mtoe',
       formatter: function() {
-      var globalShare = ((this.point.value * 100)/4331).toFixed(1);
-      return this.point.name + ' <br/> ' + ' <span style="color:' + this.point.color + '">\u25CF</span> ' + Highcharts.numberFormat(this.point.value, 0) + ' Mtoe<br/>(' + globalShare + ' % of global total)'
+      var globalShare = ((this.point.value * 100)/223948.5).toFixed(1);
+      return this.point.name + ' <br/> ' + ' <span style="color:' + this.point.color + '">\u25CF</span> ' + Highcharts.numberFormat(this.point.value, 0) + ' MW<br/>(' + globalShare + ' % of global total)'
       }
       },
 	    },

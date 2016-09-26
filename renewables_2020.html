@@ -1,5 +1,7 @@
 <html>
+<meta charset="utf-8">
 <head>
+	<title>Progress on 2020 renewable energy targets | Carbon Brief</title>
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/data.js"></script>
@@ -47,7 +49,7 @@
 	    // you can make your own gradient custom here:
 	    // http://www.strangeplanet.fr/work/gradient-generator/?c=9:FFFFFF:000000
 
-        colors: ['#0b4572', '#EFC530', '#2f8fce', '#C7432B', '#999999', '#DF9239', '#A14A7B'],
+        colors: ['#0b4572', '#EFC530', '#2f8fce', '#C7432B', '#DF9239', '#999999', '#A14A7B'],
 	    
 	    chart: {
      
@@ -71,17 +73,16 @@
 	        renderTo: 'container',
 	        backgroundColor: 'transparent',
 	        type: 'column',
-					// marginLeft: 90,
-					marginBottom: 70,
+//			marginLeft: 90,
 	        zoomType: 'x,y'
 	      },
 
 	      // set the title of the chart (here no title)
 
 	      title: {
-	        text: 'EU ESD 2020',
-					align: 'left',
-					margin: 30
+		        text: 'Progress on 2020 renewable energy targets',
+						align: 'left',
+						margin: 30
 	      },
 
 		  // disable the export hamburger menu
@@ -105,7 +106,7 @@
 
 	      plotOptions: {
   			column: {
-  	          stacking: 'normal',
+//  	          stacking: 'null',
   	//			negativeColor: '#C7432B',
   				pointPadding: 0,
   				groupPadding: 0.05
@@ -162,7 +163,7 @@
 
 		  tooltip: {
 			  			  valueDecimals: 1,
-		           pointFormat: '2020 target: <br/> <b>{point.y:,.0f} %</b><br/>',
+		           pointFormat: '{series.name}: <br/> <b>{point.y:,.0f} %</b><br/>',
 //			  crosshairs: 'true'
 		         },
 
@@ -172,7 +173,7 @@
 
 	        // turn the legend on or off
 
-	        enabled: false,
+	        enabled: true,
 			  padding: 20,
 	        // set the layout of the legend
 
@@ -181,8 +182,8 @@
 	        verticalAlign: 'top',
 
 	        // you can fine-tune the legend position here
-	        // y: 30,
-	         x: 15,
+	        y: 25
+	        // x: 15,
 			  
 	        // set the font size of the legend
 			// add "//" to use default settings
@@ -200,7 +201,7 @@
 	      // https://docs.google.com/spreadsheets/d/1NAzRluJxGjyrJqsI6kjtSYxcPXTIL-lQZ6chFDcx2XI/
 
 	      data: {
-	        googleSpreadsheetKey: '1P3F-EvxwzbGlt9E2T3bpcXJ3_nDAqaKW08cQMniRNRY'
+	        googleSpreadsheetKey: '1EVxBHFbwkReoNAQvuOTdUVNOTSc8Z02nfTWSLjF__EY'
 	      }
 	    },
 

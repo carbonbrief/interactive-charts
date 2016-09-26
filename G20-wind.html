@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Nuclear power capacity of the G20 countries and the rest of the world in 2015 | Carbon Brief</title>
+	<title>Wind capacity of the G20 countries and the rest of the world in 2015 | Carbon Brief</title>
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/data.js"></script>
@@ -40,7 +40,7 @@
 	    
 	    chart: {
 	      style: {
-	        fontFamily: 'PT Sans'
+	        fontFamily: '"PT Sans", Arial, sans-serif'
 	      }
 	    },
 
@@ -50,15 +50,15 @@ $('#container').highcharts({
 		chart: {
 			renderTo: 'container',
 			backgroundColor: 'transparent',
-			plotBackgroundImage: 'https://www.carbonbrief.org/wp-content/uploads/2016/08/GettyImages-182899688-nuclear-reactor.jpg',
+			plotBackgroundImage: 'https://www.carbonbrief.org/wp-content/uploads/2016/08/GettyImages-185329819-wind-turbines.jpg',
 			type: 'treemap',
 			spacing: [0,-10,0,-10]
     },
     style: {
-      fontFamily: 'PT Sans'
+      fontFamily: '"PT Sans", Arial, sans-serif'
     },
     title: {
-      text: 'Nuclear capacity',
+      text: 'Wind capacity',
 	  align: 'left',
 		x: 10
     },
@@ -107,7 +107,7 @@ $('#container').highcharts({
 
     data: {
     		firstRowAsNames: false,
-        googleSpreadsheetKey: '1qiNbP5b9GaUcCQzgm-xp3mCczluMDlpvlshuPQA1eVo',
+        googleSpreadsheetKey: '1H0VYaqhZJpMB6Sm243206NUBy4NH5LUJ-0qVROPwQjc',
         seriesMapping: [{
           value: 1,
           id: 2,
@@ -118,7 +118,7 @@ $('#container').highcharts({
           tooltip: {
       valueSuffix: ' Mtoe',
       formatter: function() {
-      var globalShare = ((this.point.value * 100)/344974).toFixed(1);
+      var globalShare = ((this.point.value * 100)/416638.6).toFixed(1);
       return this.point.name + ' <br/> ' + ' <span style="color:' + this.point.color + '">\u25CF</span> ' + Highcharts.numberFormat(this.point.value, 0) + ' MW<br/>(' + globalShare + ' % of global total)'
       }
       },
