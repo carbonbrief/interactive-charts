@@ -23,9 +23,6 @@
 
 </head>
 <body>
-	<!-- you can set minimum dimensions for the chart here -->
-	<!-- for example swap the <div below for this version -->
-	<!-- <div id="container" style="min-width: 310px; max-width: 600px; height: 400px; margin: 0 auto"></div> -->
 	
     <div id="container"></div>
 		<div id="logocontainer">
@@ -54,7 +51,7 @@
 	    
 	    chart: {
      
-	     //    set the font family for the chart. PT Serif is CB default for body text.
+	     //    set the font family for the chart. We're defaulting to PT Sans for charts.
      
 	      style: {
 	        fontFamily: '"PT Sans", Arial, sans-serif'
@@ -64,12 +61,21 @@
 
 	  // Create the chart
 	  // type: 'column'
-	  // creates column chart. See www.highcharts.com/demo/ for more options
+	  // creates column chart etc. See www.highcharts.com/demo/ for more options
 	  // zoomType: 'x,y'
 	  // allows the user to zoom in to the chart on the x and y axis
 	  // you can set to allow x zoom or y zoom only
+	  // if you have multiple charts, you'll need a separate "container" for each (container1, container2, etc)
+	  // these containers have to be set up above in the style section and with their own "div"
 
 	  $('#container').highcharts({
+		  
+		  // note the general layout of Highcharts code
+		  // it goes…     item: 'setting'
+		  // for sub-items, they go inside {squiggly brackets}
+		  // you MUST have a comma after each item 
+		  // if you miss a comma it will break the code
+		  
 	      chart: {
 	        renderTo: 'container',
 	        backgroundColor: 'transparent',
@@ -77,7 +83,9 @@
 	        zoomType: 'x,y'
 	      },
 
-	      // set the title of the chart (here no title)
+	      // set the title of the chart
+		  // align it left (our default)
+		  // the margin setting pushes it in 30px from the left
 
 	      title: {
 	        text: 'UK coal versus solar',
@@ -86,6 +94,8 @@
 	      },
 
 	      // turn off the highcharts credit
+		  // settings mostly go in 'inverted commas'
+		  // but for true/false that isn't necessary
 
 	      credits: {
 	        enabled: false
@@ -94,6 +104,10 @@
 	      // controls how the columns stack
 	      // options are 'normal' and 'percent'
 		  // if you don't want stacked columns, delete this section
+		  // plotOptions includes various handy things
+		  // here we have options for bar charts
+		  // actually, we've plotted a line chart
+		  // (so these settings are redundant)
 
 	      plotOptions: {
 	        bar: {
@@ -102,16 +116,16 @@
 	      },
 
 	      // options for the y axis
+		  // you can set a max/min or…
+		  // …more useful is a floor/ceiling
+		  // this means the axis can zoom in
+		  // but it won't ever go beyond the floor/ceiling
 
 	      yAxis: {
 
 	// controls the order of series in a stacked column/area chart
 
 	        reversedStacks: false,
-
-// fixes the maximum value for the y axis (switch off with "//")
-//			  max: 300,
-
 
 	        // sets the font size for the y axis labels
 
@@ -135,25 +149,50 @@
 	      // sets options for the x axis
 
 	      xAxis: {
+			  
+			  // this is good for eg months/countries/whatever
+			  // for number axis, just leave it out
+			  // (or use // to switch it off)
+			  
 			  type: 'category',
+				  
+				  // the crosshair highlights where the mouse hovers
+				  // for category axis it'll be a wide highlight bar
+				  // for number axis, it'll be a more familiar crosshair
+				  
 			  crosshair: {
-			                //  width: 40,
-				  // pale grey #E5E5E5
-				  // black #000000
-			            //      color: '#E5E5E5'
+
 			              },
 	        labels: {
 	          style: {
 	            fontSize: '12px'
+
+				  // need to watch out for these brackets
+				  // if you don't have the right number of opening/closing…
+				  // …it'll break your code too
+
 	          }
 	        }
 	      },
 
+		  // the tooltip is what pops up when you hover over the chart
+		  // shared = true means you get one shared popup for all series (solar, coal etc)
+
 		  tooltip: {
-			  shared: true,
-			  valueDecimals: 1,			  
+			  shared: true,		  
+			  
+			  // this formats the info in the popup
+			  // I told it to add " GWh" after each value
+			  // "series.name" calls the series name (obvs)
+			  // the "point.y" calls the y value for that point
+			  // the :.0f formats it to show zero decimal places
+			  // it also means it adds a thousands separator
+			  // eg 3 204 for three thousand two hundred and four
+			  // it's possible to do maths in the tooltip
+			  // eg you can show year-on-year change % etc etc
+			  // (ask me how)
+			  
 		           pointFormat: '{series.name}: <br/> <b>{point.y:,.0f} GWh</b><br/>',
-//			  crosshairs: 'true'
 		         },
 
 	      // sets options for the legend
@@ -163,22 +202,31 @@
 	        // turn the legend on or off
 
 	        enabled: true,
-		//	 margin: 20,
-		//	  width: 400,
+			  
+			  // these settings fine-tune the size of the legend
+			  // (they're turned off here)
+			  // margin: 20,
+			  // width: 400,
+			  // the padding is space around the legend
+			  
 			  padding: 20,
 
 	        // set the layout of the legend
 
 	        layout: 'horizontal',
+			  
+			  // if you have floating true, it'll "float" within the chart area
+			  
 	        floating: false,
 	        verticalAlign: 'top',
 
-	        // you can fine-tune the legend position here
-	        // y: 30,
-	         x: 15,
+			  // you can fine-tune the legend position here
+			  // the settings are in pixels
+			  // y: 30,
+			  x: 15,
 			  
 	        // set the font size of the legend
-			// add "//" to use default settings
+			// retain the "//" to use default settings
 
 //	        itemStyle: {
 //	          fontSize: '10px'
@@ -191,6 +239,8 @@
 	      // then grab the code from the url
 	      // for example here, the bit after "d/" and before the final "/"
 	      // https://docs.google.com/spreadsheets/d/1NAzRluJxGjyrJqsI6kjtSYxcPXTIL-lQZ6chFDcx2XI/
+		  // it's vital that the sheet in your google sheet only contain the data you want to plot
+		  // also the number format should be set to "automatic"
 
 	      data: {
 	        googleSpreadsheetKey: '13WtHhTyysk2q8sFSBEsy3paPqYW6XD4oQ038Pq0ZTKM'
@@ -199,13 +249,12 @@
 
 	    // add an image on top of the chart
 	    // you can add anything eg to annotate it
-	    // here we're using it to add the CB logo
-	    // the size and position of the logo is controlled by the numbers after the url
+	    // the size and position of the image is controlled by the numbers after the url
 	    // the first sets the x offset (#pixels from the left)
 	    // the second sets the y offset (#pixels from the top)
 	    // the third and fourth set the size in x, y
 
-	    function(chart) { // on complete
+	    function(chart) {
 
 	      chart.renderer.image()
 	        .add();
