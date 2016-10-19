@@ -15,6 +15,16 @@
 	   font: 14px 'PT Sans', sans-serif;
 	}
 	
+	h1 {
+		font-family: "PT Sans Narrow", Arial;
+		font-weight: normal;
+		font-size: 40px;
+	}
+	
+	header {
+		margin-left: 20px;
+	}
+	
 	#wrap {
 	      overflow: hidden;
 				margin: 10px;
@@ -25,7 +35,10 @@
 				position: relative;
 				width: 20%;
 				padding-bottom: 20%;
+				transition: all .2s ease-in-out;
 	    }
+			
+			.box:hover { transform: scale(1.1); }
 			
 			.boxInner {
 			   position: absolute;
@@ -40,26 +53,6 @@
 			   width: 100%;
 			}
 			
-			.boxInner .titleBox {
-			   position: absolute;
-			   bottom: 0;
-			   left: 0;
-			   right: 0;
-			   margin-bottom: -50px;
-			   background: #000;
-			   background: rgba(0, 0, 0, 0.5);
-			   color: #FFF;
-			   padding: 10px;
-			   text-align: center;
-			   -webkit-transition: all 0.3s ease-out;
-			   -moz-transition: all 0.3s ease-out;
-			   -o-transition: all 0.3s ease-out;
-			   transition: all 0.3s ease-out;
-			}
-			
-			body.no-touch .boxInner:hover .titleBox, body.touch .boxInner.touchFocus .titleBox {
-			   margin-bottom: 0;
-			}
 			
 			@media only screen and (max-width : 480px) {
 			   /* Smartphone view: 1 tile */
@@ -97,81 +90,74 @@
 	   <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 	<![endif]-->
 </head> 
-<body> 
+<body>
+	<header>
+		<h1>A library of Carbon Brief's interactive charts</h1>
+	</header>
+	<section> 
 		<div id="wrap">
 		    <div class="box">
 		      <div class="boxInner">
-						<img src="icons/line-chart.jpg" />
-						<div class="titleBox">Line graphs</div>
+						<a href="line-charts.html"><img src="icons/line-chart.jpg" /></a>
 		      </div>
 		    </div>
 		    <div class="box">
 		      <div class="boxInner">
-						<img src="icons/column-chart.jpg" />
-						<div class="titleBox">Column graphs</div>
+						<a href="column-charts.html"><img src="icons/column-chart.jpg" /></a>
 		      </div>
 		    </div>
 		    <div class="box">
 		      <div class="boxInner">
-						<img src="icons/grouped-column-chart.jpg" />
-						<div class="titleBox">Grouped column graphs</div>
+						<a href="grouped-column.html"><img src="icons/grouped-column-chart.jpg" /></a>
 		      </div>
 		    </div>
 		    <div class="box">
 		      <div class="boxInner">
-						<img src="icons/stacked-column-chart.jpg" />
-						<div class="titleBox">Stacked column graphs</div>
+						<a href="stacked-column.html"><img src="icons/stacked-column-chart.jpg" /></a>
 		      </div>
 		    </div>
 		    <div class="box">
 		      <div class="boxInner">
-						<img src="icons/stacked-bar-chart.jpg" />
-						<div class="titleBox">Stacked bar graphs</div>
+						<a href="stacked-bar.html"><img src="icons/stacked-bar-chart.jpg" /></a>
 		      </div>
 		    </div>
 		    <div class="box">
 		      <div class="boxInner">
-						<img src="icons/stacked-area-chart.jpg" />
-						<div class="titleBox">Stacked area graphs</div>
+						<a href="stacked-column.html"><img src="icons/stacked-area-chart.jpg" /></a>
 		      </div>
 		    </div>
 		    <div class="box">
 		      <div class="boxInner">
-						<img src="icons/line-and-column.jpg" />
-						<div class="titleBox">Line & column graphs</div>
+						<a href="line-and-column.html"><img src="icons/line-and-column.jpg" /></a>
 		      </div>
 		    </div>
 		    <div class="box">
 		      <div class="boxInner">
-						<img src="icons/scatter-and-column.jpg" />
-						<div class="titleBox">Scatterplot & column graphs</div>
+						<a href="scatter-and-column.html"><img src="icons/scatter-and-column.jpg" /></a>
 		      </div>
 		    </div>
 		    <div class="box">
 		      <div class="boxInner">
-						<img src="icons/line-and-stacked-area.jpg" />
-						<div class="titleBox">Line & stacked area graphs</div>
+						<a href="line-and-stacked-area.html"><img src="icons/line-and-stacked-area.jpg" /></a>
 		      </div>
 		    </div>
 		    <div class="box">
 		      <div class="boxInner">
-						<img src="icons/small-multiples-stacked-column.jpg" />
-						<div class="titleBox">Small multiples: stacked column graphs</div>
+						<a href="small-multiples-column.html"><img src="icons/small-multiples-stacked-column.jpg" /></a>
 		      </div>
 		    </div>
 		    <div class="box">
 		      <div class="boxInner">
-						<img src="icons/treemap.jpg" />
-						<div class="titleBox">Treemaps</div>
+						<a href="treemaps.html"><img src="icons/treemap.jpg" /></a>
 		      </div>
 		    </div>
 		    <div class="box">
 		      <div class="boxInner">
-						<img src="icons/map.jpg" />
-						<div class="titleBox">Maps</div>
+						<a href="maps.html"><img src="icons/map.jpg" /></a>
 		      </div>
 		    </div>
 		  </div>
+		</section>
 
 </body> 
 </html>
