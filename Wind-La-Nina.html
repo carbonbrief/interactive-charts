@@ -17,7 +17,6 @@
 	li {float: left;}
 	
 	li img {width: 10px; padding-right: 10px; padding-left: 20px;}
-
 	#logocontainer{ max-width: 800px; height: 26px;}
 	
 	#logo {position: absolute; right:10px;}
@@ -57,7 +56,6 @@
     <script type="text/javascript">        
 	$(function() {
 	  Highcharts.setOptions({
-
 	    // here is the CB colour scheme
 	    // dark blue - 0b4572
 	    // yellow - EFC530
@@ -66,13 +64,11 @@
 	    // light grey - 999999
 	    // lilac - A14A7B
 	    // orange - DF9239
-
 	    // this line sets the colours
 	    // the first colour is for bottom chunk of a stacked column (reversed: false)
 	    // here I've used a gradient of 15 steps from CB dark blue to red, via grey
 	    // you can make your own gradient custom here:
 	    // http://www.strangeplanet.fr/work/gradient-generator/?c=9:FFFFFF:000000
-
         colors: ['#0b4572', '#A14A7B', '#2f8fce', '#C7432B', '#999999', '#DF9239', '#A14A7B'],
 	    
 	    chart: {
@@ -84,14 +80,12 @@
 	      }
 	    }
 	  });
-
 	  // Create the chart
 	  // type: 'column'
 	  // creates column chart. See www.highcharts.com/demo/ for more options
 	  // zoomType: 'x,y'
 	  // allows the user to zoom in to the chart on the x and y axis
 	  // you can set to allow x zoom or y zoom only
-
 	  $('#container').highcharts({
 	      chart: {
 	        renderTo: 'container',
@@ -99,9 +93,7 @@
 	        type: 'column',
 	        zoomType: 'x,y'
 	      },
-
 	      // set the title of the chart (here no title)
-
 	      title: {
 	        text: 'UK wind speeds vs load factors (DJF)',
 			  align: 'left'
@@ -112,17 +104,13 @@
 		                  enabled: false
 		              }
 		          },
-
 	      // turn off the highcharts credit
-
 	      credits: {
 	        enabled: false
 	      },
-
 	      // controls how the columns stack
 	      // options are 'normal' and 'percent'
 		  // if you don't want stacked columns, delete this section
-
 	      plotOptions: {
 	        column: {
 	          stacking: 'normal',
@@ -134,13 +122,9 @@
 				lineWidth: 2
 	        }
 	      },
-
 	      // options for the y axis
-
 	      yAxis: [{
-
 	// controls the order of series in a stacked column/area chart
-
 	        // reversedStacks: false,
 			  
 			  
@@ -149,10 +133,7 @@
 			  tickInterval: 15,
 		//	  endOnTick: false,
 		//	  tickPositions: [0,15,30,45,60],
-
-
 	        // sets the font size for the y axis labels
-
 	        labels: {
 	          style: {
 	            fontSize: '12px',
@@ -160,24 +141,20 @@
                     color: '#0b4572'
                 
 	          },
-
 	          // adds the suffix "Mt" to the values on the y axis
-
 	          format: '{value} %'
 	        },
-
 	        // set the title of the y axis
-
 	        title: {
 	          text: ''
 	        }
 	      },
 		  {
-			  ceiling: 3,
-			  tickInterval: 1,
-			  endOnTick: false,
-			 // tickPositions: [-3,-2,-1,0,1,2,3]
-
+			 // max: 6,
+			  //tickInterval: 1,
+			  //endOnTick: false,
+			  //tickInterval: 3,
+			 tickPositions: [-6,-3,0,3,6],
   	        labels: {
   	          style: {
   	            fontSize: '12px',
@@ -185,26 +162,19 @@
                     color: '#A14A7B'
                 
   	          },
-
   	          // adds the suffix "Mt" to the values on the y axis
-
   	          format: '{value} Kn'
   	        },
-
   	        // set the title of the y axis
-
   	        title: {
   	          text: '',
   	        },
 			opposite: true
 		  }
 	  ],
-
 	      // sets options for the x axis
-
 	      xAxis: {
 			  type: 'category',
-
 			  crosshair: {
 			                //  width: 40,
 				  // pale grey #E5E5E5
@@ -261,48 +231,37 @@
 					   }
 				   ]
 	      },
-
 		  tooltip: {
 			  valueSuffix: ' % ',
 		           pointFormat: '{series.name}: <br/> <b>{point.y}</b><br/>',
 //			  crosshairs: 'true'
 			  shared: true
 		         },
-
 	      // sets options for the legend
-
 	      legend: {
-
 	        // turn the legend on or off
-
 	        enabled: true,
 			  padding: 30,
 	        // set the layout of the legend
-
 	        layout: 'horizontal',
 	        floating: false,
 	        verticalAlign: 'top',
 			  align: 'center',
-
 	        // you can fine-tune the legend position here
 	         y: 20,
 //	         x: 15,
 			  
 	        // set the font size of the legend
 			// add "//" to use default settings
-
 //	        itemStyle: {
 //	          fontSize: '10px'
 //	        }
-
 	      },
-
 	      // pull the data from a google spreadsheet
 	      // you have to publish the spreadsheet to the web
 	      // then grab the code from the url
 	      // for example here, the bit after "d/" and before the final "/"
 	      // https://docs.google.com/spreadsheets/d/1NAzRluJxGjyrJqsI6kjtSYxcPXTIL-lQZ6chFDcx2XI/
-
 	      data: {
 	        googleSpreadsheetKey: '1JBZpxMEpaKENBumJDBr2q-gRSWD_mR3htowAABy0Fnk',
               complete: function (options) {
@@ -317,7 +276,6 @@
 			  }
 	      }
 	    },
-
 	    // add an image on top of the chart
 	    // you can add anything eg to annotate it
 	    // here we're using it to add the CB logo
@@ -325,19 +283,12 @@
 	    // the first sets the x offset (#pixels from the left)
 	    // the second sets the y offset (#pixels from the top)
 	    // the third and fourth set the size in x, y
-
 	    function(chart) { // on complete
-
 	      chart.renderer.image()
 	        .add();
-
-
 	    });
-
-
 	});
     
-
     </script>
 </body>
 </html>
