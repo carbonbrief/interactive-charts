@@ -28,13 +28,25 @@
 	
 	@media screen and (min-width: 1200px) {
 		#container1 {
-			padding-top: 50px;
+			padding-top: 30px;
 		}
 	}
 	
 	@media screen and (min-width: 800px) and (max-width: 1200px;) {
 		#container1 {
-			padding-top: 30px;
+			padding-top: 20px;
+		}
+	}
+	
+	@media screen and (min-width: 600px) and (max-width: 800px) {
+		#container1 {
+			height: 500px;
+		}
+	}
+	
+	@media screen and (max-width: 600px) {
+		#container1 {
+			height: 350px;
 		}
 	}
 	
@@ -118,14 +130,14 @@
                     //    }
                     //},
                     align: 'right',
-                    verticalAlign: 'middle',
+                   // verticalAlign: 'middle',
                     floating: false,
                     layout: 'vertical',
                     valueDecimals: 0,
                     backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || 'rgba(255, 255, 255, 0.85)',
                     //symbolRadius: 0,
                     //symbolHeight: 14,
-					y: 150
+				//	y: 150
                 },
 
                 colorAxis: {
