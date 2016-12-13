@@ -1,0 +1,174 @@
+<html>
+<head>
+	<title>Effective CO2 price by country</title>
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://code.highcharts.com/maps/highmaps.js"></script>
+<script src="https://code.highcharts.com/maps/modules/data.js"></script>
+<script src="https://code.highcharts.com/mapdata/custom/world-robinson-highres.js"></script>
+<script src="https://code.highcharts.com/mapdata/countries/us/us-all.js"></script>
+
+</head>
+<style>
+	
+	#container1 {    height: 550px;
+    min-width: 310px; 
+    max-width: 1200px;
+		margin-left: auto;
+		margin-right: auto; 
+}
+.loading {
+    margin-top: 10em;
+    text-align: center;
+    color: gray;
+}
+
+	#logocontainer{ max-width: 1150px; height: 26px; margin-right: auto; margin-left: auto;} /**altered in order to fit the big iframe**/
+	#logo {position: relative; float: right; padding-right: 20px;} /**altered in order to fit the big iframe**/
+	
+	
+	
+	
+</style>
+<body>
+	<!-- you can set minimum dimensions for the chart here -->
+	<!-- for example swap the <div below for this version -->
+	<!-- <div id="container" style="min-width: 310px; max-width: 600px; height: 400px; margin: 0 auto"></div> -->
+	
+<div id="container1">
+    <div class="loading">
+        <i class="icon-spinner icon-spin icon-large"></i>
+        Loading data from Google Spreadsheets...
+    </div>
+</div>
+
+	<div id="logocontainer">
+		<div id="logo"> <!-- extra div -->
+		<img src="https://s3-eu-west-1.amazonaws.com/cbhighcharts/CB-logo-for-highcharts.png">
+		<div>
+	</div>
+	
+    <script type="text/javascript">        
+
+	$(function () {
+
+
+
+
+	    // Load the data from a Google Spreadsheet
+	    // https://docs.google.com/a/highsoft.com/spreadsheet/pub?hl=en_GB&hl=en_GB&key=0AoIaUO7wH1HwdFJHaFI4eUJDYlVna3k5TlpuXzZubHc&output=html
+	    Highcharts.data({
+
+	        googleSpreadsheetKey: '1j6Q8pVD5jbRi4tf85O5BYX_9BsTQ3H3Obm_eS__9hEY',
+
+	        // custom handler when the spreadsheet is parsed
+	        parsed: function (columns) {
+
+	            // Read the columns into the data array
+	            var data = [];
+	            $.each(columns[0], function (i, code) {
+	                data.push({
+	                    code: code.toUpperCase(),
+	                    value: parseFloat(columns[2][i]),
+	                    name: columns[0][i]
+	                });
+	            });
+
+
+            // Initiate the chart
+            $('#container1').highcharts('Map', {
+                chart: {
+                    borderWidth: 0
+                },
+				style: {
+					fontFamily: "PT Sans"
+				},
+
+
+                //colors: ['rgba(11,69,114,0.1)', 'rgba(11,69,114,0.2)', 'rgba(11,69,114,0.4)',
+                //    'rgba(11,69,114,0.5)', 'rgba(11,69,114,0.6)', 'rgba(11,69,114,0.8)', 'rgba(11,69,114,1)'],
+			    
+                title: {
+                    text: '',
+					align: 'left'
+                },
+
+                mapNavigation: {
+                    enabled: true,
+					enableButtons: false
+                },
+                credits: {
+                enabled: false
+                },
+
+                legend: {
+                    //title: {
+                    //    text: '\u20AC per tonne of CO2',
+                    //    style: {
+                    //        color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                    //    }
+                    //},
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    floating: false,
+                    layout: 'vertical',
+                    valueDecimals: 0,
+                    backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || 'rgba(255, 255, 255, 0.85)',
+                    //symbolRadius: 0,
+                    //symbolHeight: 14,
+					y: 150
+                },
+
+                colorAxis: {
+                    min: -30,
+					max: 30,
+					tickInterval: 10,
+					type: 'linear',
+					//maxColor: '#C7432B',
+					//minColor: '#2f8fce',
+				    stops: [
+				                       [0, '#2f8fce'],
+				                       [0.5, '#f3f3f3'],
+				                       [1, '#C7432B']
+				                   ]
+					
+                },
+
+                series: [{
+					data: data,
+					mapData: Highcharts.maps['countries/us/us-all'],
+                	joinBy: ['postal-code', 'code'],
+                    animation: true,
+                    name: 'Change in emissions',
+					dataLabels: {
+						enabled: true,
+						format: '{point.code}'
+					},
+                    states: {
+                        hover: {
+                            color: '#EFC530'
+                        }
+                    },
+					
+                    tooltip: {
+                        //valuePrefix: '\u20AC',
+                        valueSuffix: ' %'
+                    }
+                }]
+            });
+        },
+        error: function () {
+            $('#container').html('<div class="loading">' +
+                '<i class="icon-frown icon-large"></i> ' +
+                'Error loading data from Google Spreadsheets' +
+                '</div>');
+        }
+    });
+});
+    
+
+    </script>
+	
+
+	
+</body>
+</html>
