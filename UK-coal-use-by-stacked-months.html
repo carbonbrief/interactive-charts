@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+	<title>Graph: UK monthly coal use | Carbon Brief</title>
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+</head>
+<style>
+	
+	#container1 {max-width: 800px; height: 600px;}
+	#container2 {max-width: 800px; height: 400px;}	
+	#logocontainer{ max-width: 800px; height: 26px;}
+	#logo {position: absolute; right:10px;}
+	
+	@media screen and (min-width: 830px) {
+	    #logo {
+	        left: 778px;
+	    }
+	}
+	
+</style>
+<body>
+	<!-- you can set minimum dimensions for the chart here -->
+	<!-- for example swap the <div below for this version -->
+	<!-- <div id="container" style="min-width: 310px; max-width: 600px; height: 400px; margin: 0 auto"></div> -->
+	
+    <div id="container1" style="max-width: 800px"></div>
+	<div id="logocontainer">
+		<img id="logo" src="https://s3-eu-west-1.amazonaws.com/cbhighcharts/CB-logo-for-highcharts.png">
+	</div>
+
+    <script type="text/javascript">        
+	$(function() {
+	  Highcharts.setOptions({
+
+	    // here is the CB colour scheme
+	    // dark blue - 0b4572
+	    // yellow - EFC530
+	    // light blue - 2f8fce
+	    // red - C7432B
+	    // light grey - 999999
+	    // lilac - A14A7B
+	    // orange - DF9239
+
+	    // this line sets the colours
+	    // the first colour is for bottom chunk of a stacked column (reversed: false)
+	    // here I've used a gradient of 15 steps from CB dark blue to red, via grey
+	    // you can make your own gradient custom here:
+	    // http://www.strangeplanet.fr/work/gradient-generator/?c=9:FFFFFF:000000
+
+        colors: ["#0B4572", "#0B4572", "#0B4572", "#0B4572", "#0B4572", "#2f8fce", "#2f8fce", "#2f8fce", "#2f8fce", "#2f8fce", "#999999", "#999999", "#999999", "#999999", "#999999", "#A67F78", "#A67F78", "#A67F78", "#A67F78", "#A67F78", "#C7432B", "#C7432B"],
+	    
+	    chart: {
+     
+	     //    set the font family for the chart. PT Serif is CB default for body text.
+     
+	      style: {
+	        fontFamily: 'PT Sans'
+	      }
+	    }
+	  });
+
+	  // Create the chart
+	  // type: 'column'
+	  // creates column chart. See www.highcharts.com/demo/ for more options
+	  // zoomType: 'x,y'
+	  // allows the user to zoom in to the chart on the x and y axis
+	  // you can set to allow x zoom or y zoom only
+
+	  $('#container1').highcharts({
+	      chart: {
+			 // polar: true,
+	        renderTo: 'container1',
+
+	        backgroundColor: 'transparent',
+	        type: 'line',
+//	        zoomType: 'x,y'
+	      },
+
+	      // set the title of the chart (here no title)
+
+	      title: {
+	        text: 'UK monthly coal use',
+			  align: 'left'
+	      },
+		  navigation: {
+		              buttonOptions: {
+		                  enabled: false
+		              }
+		          },
+			      plotOptions: {
+					  line: {
+						  //symbol: 'circle',
+						  marker: {
+							  enabled: false,
+							  radius: 3
+						  }
+					  },
+				  },
+
+	      // turn off the highcharts credit
+
+	      credits: {
+	        enabled: false
+	      },
+          pane: {
+              size: '80%'
+          },
+
+	      // controls how the columns stack
+	      // options are 'normal' and 'percent'
+		  // if you don't want stacked columns, delete this section
+
+
+	      // options for the y axis
+
+	      yAxis: [
+	      	
+			  {
+
+	// controls the order of series in a stacked column/area chart
+			  //tickInterval: 100,
+//	        reversedStacks: false,
+				  //gridLineInterpolation: 'polygon',
+				  //lineWidth: 0,
+				  //min: 0,
+//				  			  tickInterval: '5000',
+
+// fixes the maximum value for the y axis (switch off with "//")
+//			  max: 300,
+
+
+	        // sets the font size for the y axis labels
+
+	        labels: {
+	          style: {
+	            fontSize: '12px'
+	          },
+
+
+	          // adds the suffix "Mt" to the values on the y axis
+
+	          format: '{value:,.0f} Mt',
+	        },
+//			tickInterval: 150,
+//			tickAmount: 3,
+//			minorTickInterval: "auto",
+	        // set the title of the y axis
+
+	        title: {
+	          text: ''
+	        }
+		},
+
+	  ],
+
+	      // sets options for the x axis
+
+	      xAxis: {
+//			  type: 'category',
+			  
+//	        labels: {
+//	          style: {
+//	            fontSize: '12px'
+//	          }
+//	        }
+	      },
+
+		  tooltip: {
+
+			  valueSuffix: ' TWh',
+			  valueDecimals: 1,
+  	        formatter: function() {
+  				var firstValueInData = this.series.yData[9],
+  				rate1, rate2;
+  				rate1 = ((this.y - firstValueInData)/firstValueInData * 100).toFixed(0);
+				rate2 = (100 * (this.y - this.series.yData[this.series.index - 1])/this.series.yData[this.series.index - 1]).toFixed(1);
+				
+			
+  	        	// turning off tooltips for undefined values
+  	          if (typeof this.y === 'undefined') {
+  	            return false;
+  	            // custom tooltip for the rest values
+  	          } else {
+				  if (this.series > 12) {
+	    	            return this.point.name + ' <br/> ' + ' <span style="color:' + this.series + this.point.color + '">\u25CF</span> ' + this.series.name + ': <b>' + Highcharts.numberFormat(this.y,1) + ' blah</b><br/>' + (rate2 > 0 ? '+' + rate2 : rate2) + '% year-on-year<br/>';				  	
+				  } else {
+	    	            return this.point.name + ' <br/> ' + ' <span style="color:' + this.point.color + '">\u25CF</span> ' + this.series.name + ': <b>' + Highcharts.numberFormat(this.y,1) + ' Mt</b><br/>';
+				  }
+  	          }
+  	        }
+//		           pointFormat: '{series.name}: <br/> <b>{point.y:,.1f} Mtoe</b><br/>{point.percentage:.1f} %',
+//			  crosshairs: 'true'
+			  //shared: true
+		         },
+
+	      // sets options for the legend
+
+	      legend: {
+
+	        // turn the legend on or off
+
+	        enabled: true,
+			  padding: 30,
+	        // set the layout of the legend
+
+	        layout: 'horizontal',
+	        floating: false,
+	        verticalAlign: 'top',
+			  align: 'center',
+			  
+
+	        // you can fine-tune the legend position here
+	         y: 20,
+	         //x: 15,
+			  
+	        // set the font size of the legend
+			// add "//" to use default settings
+
+//	        itemStyle: {
+//	          fontSize: '10px'
+//	        }
+
+	      },
+
+	      // pull the data from a google spreadsheet
+	      // you have to publish the spreadsheet to the web
+	      // then grab the code from the url
+	      // for example here, the bit after "d/" and before the final "/"
+	      // https://docs.google.com/spreadsheets/d/1NAzRluJxGjyrJqsI6kjtSYxcPXTIL-lQZ6chFDcx2XI/
+
+	      data: {
+	        googleSpreadsheetKey: '1Y9rt9MNi1IovsDgOSyAbo7L7QoLQ8XqhBQ-lBcW7BGY',
+              complete: function (options) {
+              	var series = options.series;
+              
+                // adding type of series on the fly
+                series[21].lineWidth = 3;
+				series[21].marker = {
+					enabled: 'true',
+					radius: 5	
+				};
+//				series[21].type = 'line';
+//				series[1].tooltip = {
+//					valuePrefix: '\u00A3 ',
+//					valueSuffix: ''
+//				}
+			  }
+		  }
+	    },
+
+	    // add an image on top of the chart
+	    // you can add anything eg to annotate it
+	    // here we're using it to add the CB logo
+	    // the size and position of the logo is controlled by the numbers after the url
+	    // the first sets the x offset (#pixels from the left)
+	    // the second sets the y offset (#pixels from the top)
+	    // the third and fourth set the size in x, y
+
+	    function(chart) { // on complete
+
+	      chart.renderer.image()
+	        .add();
+
+
+	    });
+
+
+	});
+    
+
+    </script>
+	
+
+	
+</body>
+</html>
