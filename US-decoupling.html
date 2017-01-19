@@ -10,7 +10,7 @@
 </head>
 <style>
 	
-	#container1 {    height: 550px;
+	#container1 {    height: 600px;
     min-width: 310px; 
     max-width: 1200px;
 		margin-left: auto;
@@ -26,7 +26,29 @@
 	#logo {position: relative; float: right; padding-right: 20px;} /**altered in order to fit the big iframe**/
 	
 	
+	@media screen and (min-width: 1200px) {
+		#container1 {
+			padding-top: 30px;
+		}
+	}
 	
+	@media screen and (min-width: 800px) and (max-width: 1200px;) {
+		#container1 {
+			padding-top: 20px;
+		}
+	}
+	
+	@media screen and (min-width: 600px) and (max-width: 800px) {
+		#container1 {
+			height: 500px;
+		}
+	}
+	
+	@media screen and (max-width: 600px) {
+		#container1 {
+			height: 350px;
+		}
+	}
 	
 </style>
 <body>
@@ -88,7 +110,7 @@
                 //    'rgba(11,69,114,0.5)', 'rgba(11,69,114,0.6)', 'rgba(11,69,114,0.8)', 'rgba(11,69,114,1)'],
 			    
                 title: {
-                    text: '',
+                    text: 'Percent change in emissions, 2000-2014',
 					align: 'left'
                 },
 
@@ -108,14 +130,14 @@
                     //    }
                     //},
                     align: 'right',
-                    verticalAlign: 'middle',
+                   // verticalAlign: 'middle',
                     floating: false,
                     layout: 'vertical',
                     valueDecimals: 0,
                     backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || 'rgba(255, 255, 255, 0.85)',
                     //symbolRadius: 0,
                     //symbolHeight: 14,
-					y: 150
+				//	y: 150
                 },
 
                 colorAxis: {
@@ -138,7 +160,7 @@
 					mapData: Highcharts.maps['countries/us/us-all'],
                 	joinBy: ['postal-code', 'code'],
                     animation: true,
-                    name: 'Change in emissions',
+                    name: 'Change in emissions 2000-2014',
 					dataLabels: {
 						enabled: true,
 						format: '{point.code}'
