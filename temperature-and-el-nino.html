@@ -78,8 +78,8 @@
 	      chart: {
 	        renderTo: 'container1',
 	        backgroundColor: 'transparent',
-	        type: 'line',
-	        zoomType: 'x',
+	        type: 'line'
+	      //  zoomType: 'x',
 //			  marginLeft: 120
 	      },
 
@@ -127,6 +127,7 @@
 	      	
 			  {
 					max: 1.00,
+					min: -0.4,
 
 	// controls the order of series in a stacked column/area chart
 			  //tickInterval: 100,
@@ -178,6 +179,8 @@
 	      xAxis: {
 			  type: 'date',
 					dateformat: '%Y',
+					max: 2017,
+					min: 1950,
 			  
 			  crosshair: {
 			                //  width: 40,
@@ -191,7 +194,7 @@
 	          }
 	        },
 					events: {
-					            afterSetExtremes: function(e){
+					           afterSetExtremes: function(e){
 					                if(e.min === e.max){
 					                    this.setExtremes(.001, .003);
 					                }
