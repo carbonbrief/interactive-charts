@@ -1,0 +1,197 @@
+<html>
+<head>
+    <title>Graph: Paris and BAU Scenarios through 2100 | Carbon Brief</title>
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+</head>
+<style>
+
+  #container1 {max-width: 800px; height: 500px;}
+  #container2 {max-width: 800px; height: 250px;}
+  #logocontainer{ max-width: 800px; height: 26px;}
+  #logo {position: absolute; right:10px;}
+
+  @media screen and (min-width: 830px) {
+      #logo {
+          left: 778px;
+      }
+  }
+
+</style>
+<body>
+  <!-- you can set minimum dimensions for the chart here -->
+  <!-- for example swap the <div below for this version -->
+  <!-- <div id="container" style="min-width: 310px; max-width: 600px; height: 400px; margin: 0 auto"></div> -->
+
+    <div id="container1"></div>
+  <div id="logocontainer">
+    <img id="logo" src="https://s3-eu-west-1.amazonaws.com/cbhighcharts/CB-logo-for-highcharts.png">
+  </div>
+
+    <script type="text/javascript">
+  $(function() {
+    Highcharts.setOptions({
+
+      // here is the CB colour scheme
+      // dark blue - 0b4572
+      // yellow - EFC530
+      // light blue - 2f8fce
+      // red - C7432B
+      // light grey - 999999
+      // lilac - A14A7B
+      // orange - DF9239
+
+      // this line sets the colours
+      // the first colour is for bottom chunk of a stacked column (reversed: false)
+      // here I've used a gradient of 15 steps from CB dark blue to red, via grey
+      // you can make your own gradient custom here:
+      // http://www.strangeplanet.fr/work/gradient-generator/?c=9:FFFFFF:000000
+
+        colors: ["#DF9239", "#2f8fce", "#0b4572", "#587F9D", "#316287", "#0B4572", "#C7432B" ],
+      lang: {
+      thousandsSep: ','
+      },
+      chart: {
+
+       //    set the font family for the chart. PT Serif is CB default for body text.
+
+        style: {
+          fontFamily: 'PT Sans'
+        }
+      }
+    });
+
+    // Create the chart
+    // type: 'column'
+    // creates column chart. See www.highcharts.com/demo/ for more options
+    // zoomType: 'x,y'
+    // allows the user to zoom in to the chart on the x and y axis
+    // you can set to allow x zoom or y zoom only
+
+    $('#container1').highcharts({
+        chart: {
+          renderTo: 'container1',
+          backgroundColor: 'transparent',
+          type: 'line',
+          zoomType: 'x,y'
+        },
+      title: {
+        text: 'Global CO2 emissions 2000-2100',
+        align: 'left'
+        },
+      navigation: {
+        buttonOptions: {
+          enabled: false
+        }
+      },
+        credits: {
+        enabled: false
+      },
+        plotOptions: {
+        series: {
+      zoneAxis: 'x',
+      zones: [{
+          value: 2030
+      }, {
+          dashStyle: 'dot'
+      }]
+        },
+        line: {
+          lineWidth: 3,
+          symbol: 'circle',
+          marker: {
+            enabled: false,
+            radius: 3
+          }
+        },
+      },
+
+        // options for the y axis
+
+      yAxis: {
+        reversedStacks: false,
+        min: 0,
+        endOnTick: false,
+        labels: {
+          style: {
+            fontSize: '12px'
+          },
+          format: '{value:,.0f} Gtons'
+        },
+        title: {
+          text: ''
+        }
+    },
+        xAxis: {
+      //  type: 'category',
+        plotBands: [{
+          from: 2017,
+          to: 2030,
+          color: 'rgba(153,153,153,0.25)',
+        },
+            ],
+
+        crosshair: {
+                      //  width: 40,
+          // pale grey #E5E5E5
+          // black #000000
+                        color: '#E5E5E5'
+                    },
+          labels: {
+            style: {
+              fontSize: '12px'
+            }
+          }
+        },
+
+      tooltip: {
+            formatter: function() {
+          var firstValueInData = this.series.yData[17],
+          rate1, rate2;
+          rate1 = ((this.y - firstValueInData)/firstValueInData * 100).toFixed(1);
+        rate2 = (100 * (this.y - this.series.yData[((this.x - 2017)/5 - 1)])/this.series.yData[((this.x - 2017)/5 - 1)]).toFixed(1);
+
+              // turning off tooltips for undefined values
+        if (typeof this.y === 'undefined') {
+          return false;
+                // custom tooltip for the rest values
+        } else {
+          if (this.x > 2017) {
+            return this.x + '<br/><span style="color:' + this.point.color + '">\u25CF</span> ' + this.series.name + ': <b>' + Highcharts.numberFormat(this.y,0) + ' Gtons</b><br/>(' + (rate1 > 1 ? '+' + Highcharts.numberFormat(rate1,0) : Highcharts.numberFormat(rate1,0)) + ' % vs 2017)';
+          } else {
+            return this.x + '<br/><span style="color:' + this.point.color + '">\u25CF</span> ' + this.series.name + ': <b>' + Highcharts.numberFormat(this.y,0) + ' Gtons</b><br/>';
+          }                        }
+            },
+             },
+         legend: {
+
+          // turn the legend on or off
+
+          enabled: true,
+        padding: 20,
+          // set the layout of the legend
+
+        layout: 'horizontal',
+          floating: false,
+          verticalAlign: 'top',
+           y: 20,
+           //x: 15,
+        },
+        data: {
+          googleSpreadsheetKey: '1jeDXti7uEEqPaxyzc4D-_1NLp7iruE7b_E9ZiPU0fao',
+      }
+      },
+      function(chart) { // on complete
+      });
+    chart.renderer.image()
+      .add();
+  });
+
+
+    </script>
+
+
+</body>
+</html>
