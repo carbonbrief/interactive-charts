@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Global temperature 2016 | Carbon Brief</title>
+	<title>Global temperature and El Niño | Carbon Brief</title>
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/data.js"></script>
@@ -55,7 +55,7 @@
 	    // you can make your own gradient custom here:
 	    // http://www.strangeplanet.fr/work/gradient-generator/?c=9:FFFFFF:000000
 
-        colors: [ '#DF9239', '#2f8fce', '#C7432B'],
+        colors: [ '#2f8fce', '#C7432B', '#DF9239'],
 	    
 	    chart: {
      
@@ -78,15 +78,15 @@
 	      chart: {
 	        renderTo: 'container1',
 	        backgroundColor: 'transparent',
-	        type: 'line',
-	        zoomType: 'x',
+	        type: 'line'
+	      //  zoomType: 'x',
 //			  marginLeft: 120
 	      },
 
 	      // set the title of the chart (here no title)
 
 	      title: {
-	        text: 'Global surface temperature since 1850',
+	        text: 'Global surface temperature',
 			  align: 'left'
 	      },
 		  navigation: {
@@ -127,6 +127,7 @@
 	      	
 			  {
 					max: 1.00,
+					min: -0.4,
 
 	// controls the order of series in a stacked column/area chart
 			  //tickInterval: 100,
@@ -153,7 +154,7 @@
 	        // set the title of the y axis
 
 	        title: {
-	          text: 'Anomaly relative to 1961-1990'
+	          text: 'Anomaly relative to 1951-1980'
 	        }
 		},
 			{
@@ -178,6 +179,8 @@
 	      xAxis: {
 			  type: 'date',
 					dateformat: '%Y',
+					max: 2017,
+					min: 1950,
 			  
 			  crosshair: {
 			                //  width: 40,
@@ -191,7 +194,7 @@
 	          }
 	        },
 					events: {
-					            afterSetExtremes: function(e){
+					           afterSetExtremes: function(e){
 					                if(e.min === e.max){
 					                    this.setExtremes(.001, .003);
 					                }
@@ -258,7 +261,7 @@
 	      // https://docs.google.com/spreadsheets/d/1NAzRluJxGjyrJqsI6kjtSYxcPXTIL-lQZ6chFDcx2XI/
 
 	      data: {
-	        googleSpreadsheetKey: '1bp_RpMPt_zx9NmBRV-8i96TupKQ7B46eGcpuKpL08LI',
+	        googleSpreadsheetKey: '1qhbPLpLtlEYRcYCQIaQleTAFvQuM12nKx3YQU35tKvY',
 
 		  }
 	    },
