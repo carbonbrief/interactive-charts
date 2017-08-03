@@ -1,0 +1,439 @@
+<html>
+    <head>
+        <title>Graph: US electric sector emissions | Carbon Brief</title>
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/data.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+        <style>
+
+        #container {max-width: 800px;}
+
+        #logocontainer{ max-width: 800px; height: 26px;}
+        #logo {position: absolute; right:10px;}
+
+        @media screen and (min-width: 830px) {
+            #logo {
+                left: 778px;
+            }
+        }
+
+        </style>
+    </head>
+    <body>
+
+        <div id="container"></div>
+        <div id="logocontainer">
+            <img id="logo" src="https://s3-eu-west-1.amazonaws.com/cbhighcharts/CB-logo-for-highcharts.png">
+        </div>
+
+        <script type="text/javascript">
+            $(function() {
+                Highcharts.setOptions({
+
+                    // here is the CB colour scheme
+                    // dark blue - 0b4572
+                    // yellow - EFC530
+                    // light blue - 2f8fce
+                    // red - C7432B
+                    // light grey - 999999
+                    // lilac - A14A7B
+                    // orange - DF9239
+                    // you can make your own gradient custom here:
+                    // http://www.strangeplanet.fr/work/gradient-generator/?c=9:FFFFFF:000000
+
+                    colors: ['#0b4572', '#2f8fce', '#DF9239', '#999999', '#999999', '#DF9239', '#E5E5E5'],
+                        navigation: {
+                            buttonOptions: {
+                                enabled: false
+                            }
+                        },
+                    lang: {
+                                thousandsSep: ','
+                            },
+                    chart: {
+
+                        //    set the font family for the chart. PT Sans is CB default for body text.
+                        style: {
+                            fontFamily: '"PT Sans", Arial, sans-serif'
+                        }
+
+                    }
+                });
+
+                // Create the chart
+
+                $('#container').highcharts({
+
+                    chart: {
+                        renderTo: 'container',
+                        backgroundColor: 'transparent',
+                        type: 'column',
+                        zoomType: 'x,y'
+                    },
+
+                    // set the title of the chart
+
+                    title: {
+                        text: 'US electric sector CO2 emissions',
+                        align: 'left',
+                        margin: 30
+                    },
+
+                    subtitle: {
+                        text: 'Click the columns to see state-level values.',
+                        align: 'left',
+                        margin: 30
+                    },
+
+                    // turn off the highcharts credit
+
+                    credits: {
+                        enabled: false
+                    },
+
+                    plotOptions: {
+                        column: {
+                            stacking: 'normal',
+                            groupPadding: 0.1
+                        }
+                    },
+
+                    // options for the y axis
+
+                    yAxis: {
+
+                        // controls the order of series in a stacked column/area chart
+
+                        reversedStacks: false,
+
+
+                        // sets the font size for the y axis labels
+
+                        labels: {
+
+                            style: {
+                                fontSize: '12px'
+                            },
+
+                            // adds the suffix "Mt" to the values on the y axis
+
+                            format: '{value} Mt'
+                        },
+
+                    // set the title of the y axis
+
+                        title: {
+                            text: ''
+                        }
+
+                    },
+
+                    // sets options for the x axis
+
+                    xAxis: {
+                        type: 'category',
+                        crosshair: {
+                            color: '#E5E5E5'
+                        },
+                        labels: {
+                            style: {
+                                fontSize: '12px'
+                            }
+                        }
+                    },
+
+                    // tweak to edit the tooltip. check out the API for more options
+
+                    tooltip: {
+                        valueDecimals: 1,
+                        pointFormat: 'Emissions from {series.name}: <br/> <b>{point.y} Mt</b><br/>',
+
+                    },
+
+                    // sets options for the legend
+
+                    legend: {
+
+                        // turn the legend on or off
+
+                        enabled: true,
+                        padding: 20,
+
+                        // set the layout of the legend
+
+                        layout: 'horizontal',
+                        floating: false,
+                        verticalAlign: 'top',
+
+                        // you can fine-tune the legend position here, make sure you have allowed enough space so that it is not overlapping with the title on a mobile
+                        y: 20
+
+                    },
+
+                    // for a drilldown the data is added within the html document
+
+                    series: [{
+                        name: 'USCA member',
+                        data: [{
+                            name: 'Coal',
+                            y: 56.7,
+                            drilldown: 'coal'
+                        }, {
+                            name: 'Natural Gas',
+                            y: 116.4,
+                            drilldown: 'natural gas'
+                        }, {
+                            name: 'Petroleum',
+                            y: 16.1,
+                            drilldown: 'petroleum'
+                        }]
+                    }, {
+                        name: 'Emission target',
+                        data: [{
+                            name: 'Coal',
+                            y: 274.0,
+                            drilldown: 'coal 2'
+                        }, {
+                            name: 'Natural Gas',
+                            y: 115.3,
+                            drilldown: 'natural gas 2'
+                        }, {
+                            name: 'Petroleum',
+                            y: 7.2,
+                            drilldown: 'petroleum 2'
+                        }]
+                    }, {
+                        name: 'No controls',
+                        data: [{
+                            name: 'Coal',
+                            y: 1019.7,
+                            drilldown: 'coal 3'
+                        }, {
+                            name: 'Natural Gas',
+                            y: 295.0,
+                            drilldown: 'natural gas 3'
+                        }, {
+                            name: 'Petroleum',
+                            y: 24.7,
+                            drilldown: 'petroleum 3'
+                        }]
+                    }],
+                    drilldown: {
+                        activeDataLabelStyle: {
+                            color: 'white',
+                            textShadow: '0 0 2px black, 0 0 2px black'
+                        },
+                        series: [{
+                            id: 'coal',
+                            name: 'USCA members: Coal',
+                            data: [
+                                ['MN', 24.7],
+                                ['VA', 17.2],
+                                ['WA', 5]   ,
+                                ['NY', 2.4] ,
+                                ['OR', 2.4] ,
+                                ['MA', 2.2] ,
+                                ['HI', 1.3] ,
+                                ['CT', 0.6] ,
+                                ['DE', 0.6] ,
+                                ['CA', 0.3] ,
+                                ['RI', 0]
+                            ]
+                        }, {
+                            id: 'natural gas',
+                            name: 'USCA members: Natural Gas',
+                            data: [
+                                ['CA', 45.9],
+                                ['NY', 22.5],
+                                ['VA', 13.1],
+                                ['MA', 8.3],
+                                ['CT', 6.9],
+                                ['OR', 6.4],
+                                ['WA', 5.2],
+                                ['MN', 2.9],
+                                ['DE', 2.6],
+                                ['RI', 2.6],
+                                ['VT', 0]
+                            ]
+                        }, {
+                            id: 'petroleum',
+                            name: 'USCA members: Petroleum',
+                            data: [
+                                ['HI', 8.2],
+                                ['NY', 2.2],
+                                ['CA', 1.9],
+                                ['VA', 1.3],
+                                ['MA', 0.9],
+                                ['CT', 0.5],
+                                ['WA', 0.5],
+                                ['DE', 0.5],
+                                ['RI', 0.1],
+                                ['MN', 0]  ,
+                                ['OR', 0]  ,
+                                ['VT', 0]
+                            ]
+                        },{
+                            id: 'coal 2',
+                            name: 'Emission target: Coal',
+                            data: [
+                                ['IL', 73.7],
+                                ['MI', 52.8],
+                                ['FL', 42.8],
+                                ['AZ', 36.1],
+                                ['CO', 31.5],
+                                ['NM', 20.4],
+                                ['MD', 13.9],
+                                ['NJ', 1.8] ,
+                                ['NH', 0.9] ,
+                                ['ME', 0.1]
+                            ]
+                        }, {
+                            id: 'natural gas 2',
+                            name: 'Emission target: Natural Gas',
+                            data: [
+                                ['FL', 61.5],
+                                ['NJ', 14.6],
+                                ['AZ', 13.3],
+                                ['MI', 7.9] ,
+                                ['CO', 4.6] ,
+                                ['IL', 4.3] ,
+                                ['NM', 3.7] ,
+                                ['NH', 2.4] ,
+                                ['MD', 1.8] ,
+                                ['ME', 1.2]
+                            ]
+                        }, {
+                            id: 'petroleum 2',
+                            name: 'Emission target: Petroleum',
+                            data: [
+                                ['FL', 2.5] ,
+                                ['MI', 2.4] ,
+                                ['NJ', 0.7] ,
+                                ['ME', 0.6] ,
+                                ['IL', 0.4] ,
+                                ['MD', 0.3] ,
+                                ['NH', 0.2] ,
+                                ['NM', 0.1] ,
+                                ['AZ', 0.1] ,
+                                ['CO', 0]
+                            ]
+                        },{
+                            id: 'coal 3',
+                            name: 'No policy: Coal',
+                            data: [
+                                ['TX', 121.4],
+                                ['IN', 78.1] ,
+                                ['KY', 72.5] ,
+                                ['OH', 71.6] ,
+                                ['WV', 68]   ,
+                                ['MO', 65.2] ,
+                                ['PA', 64.5] ,
+                                ['WY', 43]   ,
+                                ['AL', 41.4] ,
+                                ['NC', 39.9] ,
+                                ['GA', 37.1] ,
+                                ['WI', 37.1] ,
+                                ['UT', 31.6] ,
+                                ['TN', 30.5] ,
+                                ['IA', 29.8] ,
+                                ['ND', 27.7] ,
+                                ['OK', 24.8] ,
+                                ['KS', 24.6] ,
+                                ['NE', 24.2] ,
+                                ['SC', 22.6] ,
+                                ['AR', 21.7] ,
+                                ['MT', 16]   ,
+                                ['LA', 15.1] ,
+                                ['MS', 6.4]  ,
+                                ['NV', 2.7]  ,
+                                ['SD', 1.5]  ,
+                                ['AK', 0.7]  ,
+                                ['ID', 0.1]
+                            ]
+                        }, {
+                            id: 'natural gas 3',
+                            name: 'No policy: Natural Gas',
+                            data: [
+                                ['TX', 93.9] ,
+                                ['LA', 26.2] ,
+                                ['PA', 23.5] ,
+                                ['AL', 22.1] ,
+                                ['GA', 19.9] ,
+                                ['MS', 17.8] ,
+                                ['NC', 14.4] ,
+                                ['OK', 13.5] ,
+                                ['NV', 11.5] ,
+                                ['OH', 11.1] ,
+                                ['SC', 6.5]  ,
+                                ['IN', 6.4]  ,
+                                ['AR', 5.9]  ,
+                                ['WI', 5.3]  ,
+                                ['TN', 3.7]  ,
+                                ['UT', 3.2]  ,
+                                ['KY', 2.3]  ,
+                                ['MO', 1.8]  ,
+                                ['ID', 1.5]  ,
+                                ['AK', 1.2]  ,
+                                ['IA', 0.9]  ,
+                                ['KS', 0.5]  ,
+                                ['WV', 0.5]  ,
+                                ['SD', 0.3]  ,
+                                ['WY', 0.3]  ,
+                                ['ND', 0.3]  ,
+                                ['NE', 0.2]  ,
+                                ['MT', 0.2]  ,
+                            ]
+                        }, {
+                            id: 'petroleum 3',
+                            name: 'No policy: Petroleum',
+                            data: [
+                                ['LA', 7.7]  ,
+                                ['IN', 4.2]  ,
+                                ['TX', 3.3]  ,
+                                ['OH', 2.6]  ,
+                                ['PA', 1.3]  ,
+                                ['KY', 1.2]  ,
+                                ['AK', 0.9]  ,
+                                ['MT', 0.6]  ,
+                                ['NC', 0.5]  ,
+                                ['WY', 0.5]  ,
+                                ['GA', 0.3]  ,
+                                ['WI', 0.2]  ,
+                                ['TN', 0.2]  ,
+                                ['WV', 0.2]  ,
+                                ['SC', 0.2]  ,
+                                ['ND', 0.1]  ,
+                                ['KS', 0.1]  ,
+                                ['IA', 0.1]  ,
+                                ['AR', 0.1]  ,
+                                ['AL', 0.1]  ,
+                                ['MO', 0.1]  ,
+                                ['OK', 0]    ,
+                                ['UT', 0]    ,
+                                ['NE', 0]    ,
+                                ['MS', 0]    ,
+                                ['SD', 0]    ,
+                                ['NV', 0]    ,
+                                ['ID', 0]
+                            ]
+                        }]
+                    }
+                },
+
+                function(chart) { // on complete
+
+                    chart.renderer.image()
+                    .add();
+
+
+                });
+
+
+            });
+
+
+        </script>
+    </body>
+</html>
