@@ -1,0 +1,246 @@
+<html>
+	<head>
+
+		<title>Graph: Global coal use change | Carbon Brief</title>
+		<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/modules/data.js"></script>
+		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+		<style>
+			
+			#container {max-width: 800px;}
+
+			#logocontainer{ max-width: 800px; height: 26px;}
+			#logo {position: absolute; right:10px;}
+			
+			@media screen and (min-width: 830px) {
+					#logo {
+							left: 778px;
+					}
+			}
+			
+		</style>
+
+	</head>
+	<body>
+		
+		<div id="container"></div>
+		<div id="logocontainer">
+			<img id="logo" src="https://s3-eu-west-1.amazonaws.com/cbhighcharts/CB-logo-for-highcharts.png">
+		</div>
+		<script type="text/javascript">        
+			$(function() {
+				Highcharts.setOptions({
+
+					// here is the CB colour scheme
+					// dark blue - 0b4572
+					// yellow - EFC530
+					// light blue - 2f8fce
+					// red - C7432B
+					// light grey - 999999
+					// lilac - A14A7B
+					// orange - DF9239
+					// you can make your own gradient custom here:
+					// http://www.strangeplanet.fr/work/gradient-generator/?c=9:FFFFFF:000000
+
+					colors: ['#2f8fce', '#C7432B', '#2f8fce', '#C7432B', '#999999', '#DF9239', '#A14A7B'],
+					
+					chart: {
+				
+						//    set the font family for the chart. PT Sans is CB default for body text.
+				
+						style: {
+							fontFamily: '"PT Sans", Arial, sans-serif'
+						}
+
+					}
+
+				});
+
+				// Create the chart
+				// type: 'column'
+				// creates column chart. See www.highcharts.com/demo/ for more options
+				// zoomType: 'x,y'
+				// allows the user to zoom in to the chart on the x and y axis
+				// you can set to allow x zoom or y zoom only
+
+				$('#container').highcharts({
+
+					chart: {
+						renderTo: 'container',
+						backgroundColor: 'transparent',
+						type: 'column',
+						zoomType: 'x,y'
+					},
+
+					// set the title of the chart
+
+					title: {
+						text: 'Global coal use change',
+						align: 'left',
+						margin: 40
+					},
+
+					// turn off the highcharts credit
+
+					credits: {
+						enabled: false
+					},
+
+					// turn off the navigation hamburger
+					
+					navigation: {
+						buttonOptions: {
+								enabled: false
+						}
+					},
+
+					// controls how the columns stack
+					// options are 'normal' and 'percent'
+					// if you don't want stacked columns, delete this section
+
+					plotOptions: {
+						column: {
+							stacking: 'normal',
+							negativeColor: '#0b4572',
+							pointPadding: 0,
+							groupPadding: 0.1
+						}
+					},
+
+					// options for the y axis
+
+					yAxis: [{
+
+						// controls the order of series in a stacked column/area chart
+
+							reversedStacks: false,
+
+						// sets the font size for the y axis labels
+
+						labels: {
+
+							style: {
+								fontSize: '12px',	
+								color: '#2f8fce'
+							},
+
+							// adds the suffix Mtoe to the values on the y axis
+							format: '{value} Mtoe'
+						},
+
+						// set the title of the y axis
+
+						title: {
+							text: ''
+						}
+
+					},
+
+					// controls for second y-axis
+
+					{
+
+						labels: {
+							style: {
+								fontSize: '12px',
+							
+										color: '#C7432B'
+								
+							},
+
+							// adds the suffix "%" to the values on the y axis
+
+							format: '{value} %'
+
+						},
+
+						// set the title of the y axis
+
+						title: {
+							text: ''
+						},
+
+						opposite: true
+
+					}
+				],
+
+				// sets options for the x axis
+
+				xAxis: {
+					type: 'category',
+					categories: [ 1966 , 1967 , 1968 , 1969 , 1970 , 1971 , 1972 , 1973 , 1974 , 1975 , 1976 , 1977 , 1978 , 1979 , 1980 , 1981 , 1982 , 1983 , 1984 , 1985 , 1986 , 1987 , 1988 , 1989 , 1990 , 1991 , 1992 , 1993 , 1994 , 1995 , 1996 , 1997 , 1998 , 1999 , 2000 , 2001 , 2002 , 2003 , 2004 , 2005 , 2006 , 2007 , 2008 , 2009 , 2010 , 2011 , 2012 , 2013 , 2014 , 2015 ],
+					crosshair: {
+						color: '#E5E5E5'
+					},
+					labels: {
+						style: {
+							fontSize: '12px'
+						}
+					}
+				},
+
+				//edit the tooltip
+
+				tooltip: {
+					pointFormat: '{series.name}: <br/> <b>{point.y}</b><br/>',
+					shared: true
+				},
+
+				// sets options for the legend
+
+				legend: {
+
+					// turn the legend on or off
+
+					enabled: true,
+					padding: 20,
+
+					// set the layout of the legend
+
+					layout: 'horizontal',
+					floating: false,
+					verticalAlign: 'top',
+
+					// you can fine-tune the legend position here, make sure that it doesn't overlap with the title on a small screen
+					y: 20
+		
+
+				},
+
+				// add the data
+
+				series: [
+					{
+						type: 'column',
+						yAxis: 0,
+						data: [ 16.4 , -23 , 21.1 , 44.2 , 20.1 , -8.6 , 17 , 45 , 1.1 , 29.7 , 57.7 , 47.7 , 18.3 , 78.9 , 43.6 , 25.8 , 19 , 56.7 , 84.1 , 78.8 , 24.1 , 84 , 65.1 , 22.5 , -28.2 , -24.3 , -7.4 , 10.7 , 11 , 12.1 , 58 , 2.7 , -16.9 , 11 , 79.7 , 37.4 , 94.8 , 221.6 , 180.8 , 216.9 , 161.6 , 183.8 , 47.9 , -50.3 , 160.7 , 165.7 , 14.4 , 76.3 , 20.5 , -71.3 ],
+						name: 'Year-on-year change, Mtoe'
+					},
+					{
+						type: 'line',
+									yAxis: 1,
+										data: [ 1.2 , -1.6 , 1.5 , 3.1 , 1.4 , -0.6 , 1.1 , 3.0 , 0.1 , 1.9 , 3.7 , 2.9 , 1.1 , 4.7 , 2.5 , 1.4 , 1.0 , 3.1 , 4.4 , 4.0 , 1.2 , 4.0 , 3.0 , 1.0 , -1.2 , -1.1 , -0.3 , 0.5 , 0.5 , 0.5 , 2.6 , 0.1 , -0.7 , 0.5 , 3.5 , 1.6 , 3.9 , 8.8 , 6.6 , 7.4 , 5.2 , 5.6 , 1.4 , -1.4 , 4.6 , 4.6 , 0.4 , 2.0 , 0.5 , -1.8 ],
+						name: 'Year-on-year change, %'
+					}
+				]
+
+			},
+
+					function(chart) { // on complete
+
+						chart.renderer.image()
+							.add();
+
+
+					});
+
+
+			});
+			
+
+		</script>
+	</body>
+</html>
